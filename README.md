@@ -64,7 +64,7 @@ Then, using the Ansible dynamic inventory for the specific Cloud, the helper `ad
 ## [Parts](id:parts)
 
 Currently, these playbooks are divided into the following parts:
- 
+
 1. **(Optional) Build the Cloud nodes**
 
    Run the `build_cloud.sh` script to build the Cloud nodes. Refer to the Cloud specific INSTALL guides for more information.
@@ -83,7 +83,7 @@ Currently, these playbooks are divided into the following parts:
 2. **Prepare the Cloud nodes**
 
    Run the `prepare_nodes.sh` script to prepare the nodes.
-  
+
    This installs the required OS packages, applies the recommended OS settings and prepares the database and / or the local MIT-KDC.
 
 3. **Install Ambari**
@@ -95,18 +95,37 @@ Currently, these playbooks are divided into the following parts:
 4. **Configure Ambari**
 
    Run the `configure_ambari.sh` script to configure Ambari.
-  
+
    This further configures Ambari with some settings, changes admin password and adds the repository information needed by the cluster build.
 
 5. **Apply Blueprint**
 
    Run the `apply_blueprint.sh` script to install HDP and / or HDF based on an Ambari Blueprint.
-  
+
    This uploads the blueprint to Ambari and applies it. Ambari would then create and install the cluster.
 
 6. **Post Install**
 
    Run the `post_install.sh` script to execute any actions after the cluster is built.
+
+
+...or, alternatively, the cluster can be built in cloud with following playbook [`launch_cluster_cloud`](launch_cluster_cloud.yml):
+
+1. Configure Cloud variable and its Inventory in
+```
+inventory/<cloud_to_use>/all
+```
+2. Also configure the cluster and blueprint variables ( Choose from existing examples)
+```
+playbooks/group_vars/all
+```
+3. Run the cloud launch playbook
+
+```
+export CLOUD_TO_USE='aws'
+ansible-playbook -i inventory/${CLOUD_TO_USE} launch_cluster_cloud.yml
+```
+This playbooks is designed to be friendly for `ansible-tower` or `awx` with additional steps like inventory configuration and Machine/AWS Inventory credentials steps
 
 
 ## [Features](id:features)
@@ -121,6 +140,7 @@ Currently, these playbooks are divided into the following parts:
 - [ ] Azure Block Storage (VHDs)
 - [x] Google Compute Engine nodes (with root Persistent Disks only)
 - [ ] Google Compute Engine Block Storage (additional Persistent Disks)
+- [x] Works with Ansible Tower (3.x+)
 
 ### OS support
 - [x] CentOS/RHEL 6 support

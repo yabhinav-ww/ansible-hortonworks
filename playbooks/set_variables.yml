@@ -5,7 +5,7 @@
   gather_facts: False
   tasks:
     - name: Add nodes to the hadoop-cluster group and groups representing the host_groups
-      include_tasks: "clouds/add_nodes_{{ cloud_name }}.yml"
+      include_tasks: "clouds/add_nodes_{{ cloud_name | default('aws')}}.yml"
       with_items: "{{ nodes|default(omit) }}"
 
     - name: Initialize the ambari_groups list

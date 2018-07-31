@@ -1,0 +1,14 @@
+- hosts: all
+  gather_facts: no
+
+- import_playbook: "playbooks/clouds/build_{{ cloud_name| default('aws')}}.yml"
+
+- import_playbook: "playbooks/prepare_nodes.yml"
+
+- import_playbook: "playbooks/install_ambari.yml"
+
+- import_playbook: "playbooks/configure_ambari.yml"
+
+- import_playbook: "playbooks/apply_blueprint.yml"
+
+- import_playbook: "playbooks/post_install.yml"
