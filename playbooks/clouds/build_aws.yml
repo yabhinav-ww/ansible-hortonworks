@@ -64,6 +64,7 @@
         key_material: "{{ lookup('file', cloud_config.ssh.publickey) }}"
         state: present
         wait: yes
+      when: cloud_config.ssh.upload_key
 
     - name: Build AWS Nodes
       include_tasks: build_aws_nodes.yml

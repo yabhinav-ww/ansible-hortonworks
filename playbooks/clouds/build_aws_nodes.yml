@@ -55,6 +55,7 @@
     count_tag:
       Group: "{{ cluster_name }}-{{ outer_loop.host_group }}"
     instance_tags:
+      Name: "{{ cluster_name }}-{{ outer_loop.host_group }}"
       Cluster: "{{ cluster_name }}"
       Role: "{{ outer_loop.host_group }}"
       Group: "{{ cluster_name }}-{{ outer_loop.host_group }}"

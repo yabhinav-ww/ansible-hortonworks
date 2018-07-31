@@ -28,7 +28,7 @@ This node must be able to connect to the cluster nodes via SSH and to the AWS AP
 2. Create and source the Python virtual environment
 
    ```
-   virtualenv ~/ansible; source ~/ansible/bin/activate 
+   virtualenv ~/ansible; source ~/ansible/bin/activate
    ```
 
 
@@ -44,7 +44,7 @@ This node must be able to connect to the cluster nodes via SSH and to the AWS AP
 4. Generate the SSH public/private key pair that will be loaded onto the cluster nodes (if none exists):
 
    ```
-   ssh-keygen -q -t rsa
+   ssh-keygen -q -t rsa -f ~/.ssh/{{ cluster_name }}-id_rsa
    ```
 
 
@@ -61,7 +61,7 @@ This node must be able to connect to the cluster nodes via SSH and to the AWS AP
 2. Create and source the Python virtual environment
 
    ```
-   virtualenv ~/ansible; source ~/ansible/bin/activate 
+   virtualenv ~/ansible; source ~/ansible/bin/activate
    ```
 
 
@@ -123,16 +123,16 @@ And more details about how authentication to AWS works in Ansible is on the [Ans
 1. Get the AWS access key and secret
 
    Decide on the account you want to use for the purpose of these scripts or create a new one in IAM (with a `PowerUserAccess` policy attached to it).
-   
+
    [Create](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) an Access Key if none is present.
-   
+
    Obtain the `Access Key ID` and the `Secret Access Key`.
 
 
 2. Export the environment variables
 
    With the Access Key details obtained, export them as environment variables:
- 
+
    ```
    export AWS_ACCESS_KEY_ID='AK123'
    export AWS_SECRET_ACCESS_KEY='abc123'

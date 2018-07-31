@@ -10,8 +10,9 @@ cloud_config:
   admin_username: ubuntu                                           # Depends on the image, usually can be set to ubuntu, centos or ec2-user
   ssh:
     keyname: "{{ cluster_name }}-key"
-    publickey: '~/.ssh/id_rsa.pub'
-    privatekey: '~/.ssh/id_rsa'
+    publickey: '~/.ssh/{{ cluster_name }}-id_rsa.pub'
+    privatekey: '~/.ssh/{{ cluster_name }}-id_rsa'
+    upload_key: False       #If Key has been already setup manually like in Ansible Tower Credentials, no need to upload
   security_groups:
     - name: ambari_access
       rules:
